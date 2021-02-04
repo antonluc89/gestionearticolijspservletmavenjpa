@@ -23,11 +23,11 @@ public class PrepareUpdateArticoloServlet extends HttpServlet {
 		Long idArticoloUpdate = parseIdArrivoFromString(idArticoloParam);
 				
 		try {
-			Articolo articoloDaInviare = MyServiceFactory.getArticoloServiceInstance().caricaSingoloElemento(idArticoloUpdate);
-			request.setAttribute("modifica_articolo_attr", articoloDaInviare);
+			Articolo articoloDaInviareModifica = MyServiceFactory.getArticoloServiceInstance().caricaSingoloElemento(idArticoloUpdate);
+			request.setAttribute("modifica_articolo_attr", articoloDaInviareModifica);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
+			request.setAttribute("errorMessage", "Attenzione si è verificato un errore nella procedura.");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			return;
 		}

@@ -25,11 +25,6 @@ public class ExecuteUpdateArticoloServlet extends HttpServlet {
 		super();
 	}
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -45,22 +40,21 @@ public class ExecuteUpdateArticoloServlet extends HttpServlet {
 
 		if (!this.validateInput(codiceInputParam, descrizioneInputParam, prezzoInputStringParam, dataArrivoStringParam)
 				|| dataArrivoParsed == null) {
-			request.setAttribute("errorMessage", "Errori nell'update di articolo");
+			request.setAttribute("errorMessage", "Errori nella validazione");
 			request.getRequestDispatcher("/articolo/update.jsp").forward(request, response);
 			return;
 		}
 
-		Articolo articoloUpdate = new Articolo();
+		Articolo articoloUpdate;
 		try {
-			articoloUpdate.setId(idArrivoLongParsed);
+			articoloUpdate=MyServiceFactory.getArticoloServiceInstance().caricaSingoloElemento(idArrivoLongParsed);
 			articoloUpdate.setCodice(codiceInputParam);
 			articoloUpdate.setDescrizione(descrizioneInputParam);
 			articoloUpdate.setPrezzo(Integer.parseInt(prezzoInputStringParam));
 			articoloUpdate.setDataArrivo(dataArrivoParsed);
 			
 					MyServiceFactory.getArticoloServiceInstance().aggiorna(articoloUpdate);
-//			String aggiuntaRiuscita = ("Abitante modificato con successo");
-//			MyServiceFactory.getArticoloServiceInstance().aggiorna(articoloInstance);
+
 			request.setAttribute("listaArticoliAttribute", MyServiceFactory.getArticoloServiceInstance().listAll());
 			request.setAttribute("successMessage", "Operazione di aggiornamento effettuata con successo");
 		} catch (Exception e) {
