@@ -31,7 +31,7 @@
 
 					<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
 
-					<form method="post" action="ExecuteFindArticoloServlet" novalidate="novalidate">
+					<form method="post" action="ExecuteSearchArticoloServlet" novalidate="novalidate">
 					
 						<div class="form-row">
 							<div class="form-group col-md-6">
